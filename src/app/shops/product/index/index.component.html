@@ -1,0 +1,36 @@
+<div class="container">
+    <h3 class="h3 mb-3 mt-3 font-weight-normal text-center">Product</h3>
+    <a class="btn btn-warning float-right mb-2" routerLink="/product/create"><i class="fa fa-plus-circle fa-2x"></i></a>
+
+    <table class="table">
+        <thead>
+          <tr class="table-info">
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; let i = index">
+            <td>{{ i+1 }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price | currency:'INR' }}</td>
+            <td>{{ product.description || '--' }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>
+              <a href="#" [routerLink]="['/product/', product.id, 'view']" class="btn btn-info mr-1">View</a>
+              <a href="#" [routerLink]="['/product/', product.id, 'edit']" class="btn btn-primary mr-1">Edit</a>
+              <button type="button" (click)="deleteProduct(product.id)" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+          <ng-container *ngIf="products.length == 0">
+            <tr>
+              <td colspan="5" class="text-center">Records not found..</td>
+            </tr>
+        </ng-container>
+        </tbody>
+      </table>
+</div>
